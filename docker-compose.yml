@@ -1,0 +1,10 @@
+# version: '3.9'
+
+# services:
+#   backend:
+#     build: .
+#     container_name: evy-sim-changer
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       NODE_ENV: production
