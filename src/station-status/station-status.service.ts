@@ -20,8 +20,8 @@ export class StationStatusService {
       Number(this.config.get<string>('STATION_OFFLINE_THRESHOLD')) || 0;
     const lastOnlineDate = new Date(last_ping);
     const date = new Date();
-    console.log(lastOnlineDate)
-    console.log(date)
+    console.log(new Date(lastOnlineDate), "+++")
+    console.log(new Date(date), "+++")
     if (lastOnlineDate.getTime() + stationOfflineThreshold < date.getTime()) {
       return false;
     }
@@ -42,7 +42,7 @@ export class StationStatusService {
     for (let location of locations) {
       if (!this.isStationOnline(location.last_ping.toString())) {
         const message = encodeURIComponent(
-          `\nname: ${location.name}\naddress: ${location.address}\nstatus: offline\nlast_ping: ${location.last_ping}`,
+          `\nname: ${location.name}\naddress: ${location.address}\nstatus: offline\nlast_ping: ${new Date(location.last_ping).toString()}`,
         );
         await this.notificationService.notifyByTelegram(message)
       }
